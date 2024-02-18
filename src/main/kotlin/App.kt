@@ -134,8 +134,26 @@ fun main(){
     }while(cakesBaked > 0)
     println("ate $cakesEaten cakes!!!!")
 
+    // calling functions
     sayHello()
-
+    printFactorial(5)
+    val numbers = listOf(1, 5, 8, 6, 9, 7, 4, 531, 45, 58, 78, 54, 65)
+    printOddNumbers(numbers)
+        //named arguments
+    printMessageWithPrefix(prefix = "log", message = "hello")
+    printMessageWithPrefix("hello")
+        //single expression function: look at the declaration
+    println(sum(5, 4))
+    //lambda expression
+    println({msg: String -> msg.uppercase()}("hello"))
+    //assign lambda expression to a variable
+    val makeStringUppercase = {msg: String -> msg.uppercase()}
+    println(makeStringUppercase("good bye"))
+    //pass lambda expression to another function
+    val evenNumbers = numbers.filter {x -> x % 2 == 0}
+    val oddNumbers = numbers.filter {x -> x % 2 != 0}
+    println("evenNumbers: $evenNumbers")
+    println("oddNumbers: $oddNumbers")
 }
 
 
@@ -143,3 +161,33 @@ fun main(){
 fun sayHello(){
     println("helloooooooooooooooooo")
 }
+
+fun printFactorial(num: Int){
+    println("------ print factorial ------")
+    if(num > 0){
+        var f = 1
+        print("$num! = ")
+        for(i in num downTo 1){
+            print("$i ")
+            f *= i
+            if(i > 1) print("* ")
+        }
+        println("= $f")
+    }
+}
+
+fun printOddNumbers(numbers: List<Int>){
+    println("------ printEvenNumbers ------")
+    for(n in numbers)
+        print(
+            if(n > 0 && n % 2 != 0) "$n \n"
+            else ""
+        )
+}
+
+fun printMessageWithPrefix(message: String, prefix: String = "Info") {
+    println("[$prefix] $message")
+}
+
+//single expression function
+fun sum(x: Int, y: Int) = x + y
